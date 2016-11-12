@@ -1,0 +1,14 @@
+obet zoneCaré :
+
+ - TailleVertical : int
+ - TailleHorizontal : int
+ - int TabSize [TailleVertical][TailleHorizontal] : tableauInt
+ 
+ + initTab(int Horiz, int Vert)
+ + PopCarré()
+
+objet carré  extends zoneCarre
+
+ - valeur : int
+ 
+ + BougerCarré(char Direction);
