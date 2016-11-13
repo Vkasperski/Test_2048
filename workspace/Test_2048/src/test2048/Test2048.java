@@ -42,7 +42,7 @@ public class Test2048
 					}
 					Game.affichTab();
 					Save.setTab(Game);
-					if(Game.MovePossible())
+					if(Game.MovePossible() || chx=='1')
 					{
 						System.out.println(" 'g'->Gauche \n 'd'->Droite \n 'b'->Bas \n 'h'->Haut");
 						System.out.println(" '1'->reset \n '2'->Nouvelle Partie \n '3'->Quitter \n" );

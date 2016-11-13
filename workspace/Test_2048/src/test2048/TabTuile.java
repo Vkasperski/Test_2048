@@ -35,11 +35,11 @@ public class TabTuile
 	
 	public void reset()
 	{
-		for(int i=0;i<dimention;i++)
+		for(int i=0;i<getDim();i++)
 		{
-			for(int j=0; j<dimention;j++)
+			for(int j=0; j<getDim();j++)
 			{
-				TabJeu[i][j]=0;
+				setElemTab(i,j,0);
 			}
 		}
 	}
@@ -59,11 +59,16 @@ public class TabTuile
 		return TabJeu;
 	}
 	
+	public void setElemTab(int i, int j, int elem)
+	{
+		TabJeu[i][j] = elem;
+	}
+
 	public void setTab(TabTuile Tab)
 	{
-		for(int i=0; i<dimention;i++)
+		for(int i=0; i<getDim();i++)
 		{
-			for(int j=0;j<dimention;j++)
+			for(int j=0;j<getDim();j++)
 			{
 				TabJeu[i][j]=Tab.getElemTab(i,j);
 			}
@@ -72,12 +77,12 @@ public class TabTuile
 	
 	public void TurnTable()
 	{
-		int[][] newArray = new int[dimention][dimention];
-	    for(int i = 0; i < dimention;i++) 
+		int[][] newArray = new int[getDim()][getDim()];
+	    for(int i = 0; i < getDim();i++) 
 	    {
-	       for(int j = 0; j < dimention; j++) 
+	       for(int j = 0; j < getDim(); j++) 
 	       {
-	          newArray[i][j] = TabJeu[dimention - j - 1][i];
+	          newArray[i][j] = TabJeu[getDim() - j - 1][i];
 	       }
 	    }
 	    TabJeu = newArray;
@@ -85,17 +90,17 @@ public class TabTuile
 	
  	public void affichTab()
 	{
-		for(int i=0; i<dimention;i++)
+		for(int i=0; i<getDim();i++)
 		{
 			System.out.print("| ");
-			for(int j=0;j<dimention;j++)
+			for(int j=0;j<getDim();j++)
 			{
-				if(TabJeu[i][j]==0)
+				if(getElemTab(i,j)==0)
 				{
 					System.out.print("  | ");
 				}
 				else
-					System.out.print(TabJeu[i][j]+" | ");
+					System.out.print(getElemTab(i,j)+" | ");
 			}
 			System.out.print("\n");
 		}
@@ -103,31 +108,31 @@ public class TabTuile
 	
 	public boolean MovePossible()
 	{
-		for(int i=0;i<dimention;i++)
+		for(int i=0;i<getDim();i++)
 		{
-			for(int j=0;j<dimention;j++)
+			for(int j=0;j<getDim();j++)
 			{
-				if(TabJeu[i][j]==0)
+				if(getElemTab(i,j)==0)
 				{
 					return true;
 				}
-				if(j<dimention-1 && i<dimention-1)
+				if(j<getDim()-1 && i<getDim()-1)
 				{
-					if(TabJeu[i][j]==TabJeu[i][j+1] || TabJeu[i][j]==TabJeu[i+1][j])
+					if(getElemTab(i,j)==getElemTab(i,j+1) || getElemTab(i,j)==getElemTab(i+1,j))
 					{
 						return true;
 					}
 				}
-				if(j==dimention-1 && i<dimention-1)
+				if(j==getDim()-1 && i<getDim()-1)
 				{
-					if(TabJeu[i][j]==TabJeu[i+1][j])
+					if(getElemTab(i,j)==getElemTab(i+1,j))
 					{
 						return true;
 					}
 				}
-				if(i==dimention-1 && j<dimention-1)
+				if(i==getDim()-1 && j<getDim()-1)
 				{
-					if(TabJeu[i][j]==TabJeu[i][j+1])
+					if(getElemTab(i,j)==getElemTab(i,j+1))
 					{
 						return true;
 					}
@@ -143,11 +148,11 @@ public class TabTuile
 		ArrayList<Integer> ligne = new ArrayList<Integer>();
 		ArrayList<Integer> colone = new ArrayList<Integer>();
 		int index=0;
-		for(int i=0; i<dimention;i++)
+		for(int i=0; i<getDim();i++)
 		{
-			for(int j=0; j<dimention;j++)
+			for(int j=0; j<getDim();j++)
 			{
-				if(TabJeu[i][j]==0)
+				if(getElemTab(i,j)==0)
 				{
 					ligne.add(i);
 					colone.add(j);
@@ -168,28 +173,28 @@ public class TabTuile
 			{
 				nbPop = 2;
 			}
-			TabJeu[ligne.get(index)][colone.get(index)]= nbPop;
+			setElemTab(ligne.get(index), colone.get(index), nbPop);
 		}
 	}
 	
 	public void DecalerDown()
 	{
 		int k,l=0;
-		for(int j=dimention-1;j>=0;j--)
+		for(int j=getDim()-1;j>=0;j--)
 		{
-			for(int i=dimention-1;i>=0;i--)
+			for(int i=getDim()-1;i>=0;i--)
 			{
-				if(TabJeu[i][j]==0)
+				if(getElemTab(i,j)==0)
 				{
 					k=i;
 					l=i;
 					while(k>=0)
 					{
-						if(TabJeu[k][j]!=0 && TabJeu[l][j]==0)
+						if(getElemTab(k,j)!=0 && getElemTab(l,j)==0)
 						{
-							TabJeu[l][j]=TabJeu[k][j];
-							TabJeu[k][j]=0;
-							while(TabJeu[l][i]!=0 && l>0)
+							setElemTab(l,j,getElemTab(k,j));
+							setElemTab(k,j,0);
+							while(getElemTab(l,i)!=0 && l>0)
 							{
 								l=l-1;
 							}
@@ -204,16 +209,16 @@ public class TabTuile
 	public void MoveDown()
 	{
 		DecalerDown();
-		for(int j=dimention-1;j>=0;j--)
+		for(int j=getDim()-1;j>=0;j--)
 		{
-			for(int i=dimention-1;i>0;i--)
+			for(int i=getDim()-1;i>0;i--)
 			{
 				if(i>0)
 				{
-					if(TabJeu[i][j]==TabJeu[i-1][j] && TabJeu[i][j]!=0)
+					if(getElemTab(i,j)==getElemTab(i-1,j) && getElemTab(i,j)!=0)
 					{
-						TabJeu[i][j]=TabJeu[i-1][j]*2;
-						TabJeu[i-1][j]=0;
+						setElemTab(i,j,getElemTab(i-1,j)*2);
+						setElemTab(i-1,j,0);
 					}
 				}
 			}
@@ -223,11 +228,11 @@ public class TabTuile
 
 	public boolean CheckMove(TabTuile Tab)
 	{
-		for(int i=0;i<dimention;i++)
+		for(int i=0;i<getDim();i++)
 		{
-			for(int j=0; j<dimention;j++)
+			for(int j=0; j<getDim();j++)
 			{
-				if(TabJeu[i][j]!=Tab.getElemTab(i,j))
+				if(getElemTab(i,j)!=Tab.getElemTab(i,j))
 				{
 					return true;
 				}
@@ -238,11 +243,11 @@ public class TabTuile
 	
 	public boolean is2048()
 	{
-		for(int i=0; i<dimention-1;i++)
+		for(int i=0; i<getDim()-1;i++)
 		{
-			for(int j=0;j<dimention-1;j++)
+			for(int j=0;j<getDim()-1;j++)
 			{
-				if(TabJeu[i][j]==2048)
+				if(getElemTab(i,j)==2048)
 				{
 					System.out.println("Vous avez gagner");
 					return true;
