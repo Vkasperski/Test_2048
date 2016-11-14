@@ -10,7 +10,7 @@ public class TabTuile
 	private
 		int dimention;
 		int TabJeu[][];
-		boolean isWin(true);
+		boolean isWin=true;
 		
 	public TabTuile(int dim)
 	{

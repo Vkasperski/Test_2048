@@ -8,31 +8,31 @@ import java.util.Scanner;
 
 
 public class Test2048 
-{
+{ 
 	public static void main(String[]args)
 	{
 		Scanner dim = new Scanner(System.in);
 		Scanner choix = new Scanner(System.in); 
-		int dimention;
+		int dimension;
 		char chx = '1';
 		do
 		{
-			System.out.print("Dimention du 2048 : ");
+			System.out.print("Dimension du 2048 : ");
 			try
 			{
-				dimention = dim.nextInt();
+				dimension = dim.nextInt();
 			}
 			catch(Exception e)
 			{
-				System.out.println("Dimention incorect dimention 4 cases sur 4 utilisé par défaut!!!");
-				dimention = 4;
+				System.out.println("Dimension incorect dimention 4 cases sur 4 utilisé par défaut!!!");
+				dimension = 4;
 			}
-			TabTuile Game = new TabTuile(dimention);
-			TabTuile Save = new TabTuile(dimention);
+			TabTuile Game = new TabTuile(dimension);
+			TabTuile Save = new TabTuile(dimension);
 			Save.setTab(Game);
 				do
 				{
-					if(chx=='1'||chx=='2'||chx=='g'||chx=='G'||chx=='d'||chx=='D'||chx=='b'||chx=='B'||chx=='h'||chx=='H')
+					if(chx=='r'||chx=='2'||chx=='g'||chx=='G'||chx=='d'||chx=='D'||chx=='b'||chx=='B'||chx=='h'||chx=='H')
 					{
 						if(Game.CheckMove(Save))
 						{
@@ -41,15 +41,15 @@ public class Test2048
 						}
 					}
 					Game.affichTab();
-					Save.setTab(Game);
-					if(Game.MovePossible() || chx=='1')
+					Save.setTab(Game); 
+					if(Game.MovePossible() || chx=='r' ||chx=='2')
 					{
 						System.out.println(" 'g'->Gauche \n 'd'->Droite \n 'b'->Bas \n 'h'->Haut");
-						System.out.println(" '1'->reset \n '2'->Nouvelle Partie \n '3'->Quitter \n" );
+						System.out.println(" 'r'->reset \n '2'->Nouvelle Partie \n '3'->Quitter \n" );
 						chx = choix.next().charAt(0);
 						switch (chx)
 						{
-							case '1' :
+							case 'r' :
 								Game.reset();
 								break;
 							case '2' :
@@ -90,7 +90,7 @@ public class Test2048
 					{
 						System.out.println("Plus de mouvelent disponible :\n 1->reset \n 2->Nouvelle Partie \n 3->Quitter");
 						chx = choix.next().charAt(0);
-						if(chx!='1' && chx!='2' && chx!='3')
+						if(chx!='r' && chx!='2' && chx!='3')
 						{
 							System.out.println("Choix non disponible");
 						}
