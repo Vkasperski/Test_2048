@@ -1,5 +1,6 @@
 // KASPERSKI VICTOR : TEST 2048
-// 07/11/2016
+// 14/11/2016
+// https://github.com/Vkasperski/Test_2048.git
 
 package test2048;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ public class TabTuile
 	private
 		int dimention;
 		int TabJeu[][];
+		boolean isWin(true);
 		
 	public TabTuile(int dim)
 	{
@@ -243,14 +245,18 @@ public class TabTuile
 	
 	public boolean is2048()
 	{
-		for(int i=0; i<getDim()-1;i++)
+		if(isWin)
 		{
-			for(int j=0;j<getDim()-1;j++)
+			for(int i=0; i<getDim()-1;i++)
 			{
-				if(getElemTab(i,j)==2048)
+				for(int j=0;j<getDim()-1;j++)
 				{
-					System.out.println("Vous avez gagner");
-					return true;
+					if(getElemTab(i,j)==2048)
+					{
+						System.out.println("Vous avez gagner");
+						isWin=false;
+						return true;
+					}
 				}
 			}
 		}

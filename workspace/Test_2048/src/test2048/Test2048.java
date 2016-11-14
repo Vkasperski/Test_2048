@@ -1,5 +1,6 @@
 // KASPERSKI VICTOR : TEST 2048
 // 07/11/2016
+// https://github.com/Vkasperski/Test_2048.git
 
 package test2048;
 
@@ -13,7 +14,6 @@ public class Test2048
 		Scanner dim = new Scanner(System.in);
 		Scanner choix = new Scanner(System.in); 
 		int dimention;
-		char isWin='0';
 		char chx = '1';
 		do
 		{
@@ -95,13 +95,7 @@ public class Test2048
 							System.out.println("Choix non disponible");
 						}
 					}
-					if(isWin=='0')
-					{
-						if(Game.is2048())
-						{
-							isWin='1';
-						}
-					}
+					Game.is2048();
 				}while(chx!='2' && chx !='3');
 		}while(chx!='3');
 		dim.close();
